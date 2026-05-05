@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Review Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:          #0f1117;
+      --surface:     #1a1d27;
+      --border:      #2a2d3a;
+      --text:        #e2e4ed;
+      --muted:       #6b7280;
+      --green:       #22c55e;
+      --green-dim:   rgba(34, 197, 94, 0.12);
+      --red:         #ef4444;
+      --red-dim:     rgba(239, 68, 68, 0.12);
+      --accent:      #6366f1;
+      --accent-hover:#4f52d8;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 16px 64px;
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #fff;
+    }
+
+    header p {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    /* ── Analyze button ── */
+    .btn-analyze {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s, opacity 0.15s, transform 0.1s;
+      letter-spacing: -0.01em;
+    }
+
+    .btn-analyze:hover:not(:disabled) {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-analyze:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn-analyze:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Spinner inside the button */
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── Error banner ── */
+    .error-banner {
+      margin-top: 24px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 10px;
+      padding: 14px 20px;
+      color: #fca5a5;
+      font-size: 0.9rem;
+      max-width: 560px;
+      text-align: center;
+    }
+
+    /* ── Results ── */
+    .results {
+      margin-top: 48px;
+      width: 100%;
+      max-width: 860px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+
+      /* Fade-in when results arrive */
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .results.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Column ── */
+    .column {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .column-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .column-header .icon {
+      font-size: 1rem;
+    }
+
+    .column--highlights .column-header { color: var(--green); }
+    .column--pain      .column-header { color: var(--red);   }
+
+    /* ── Item card ── */
+    .item-card {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      margin-bottom: 10px;
+      transition: border-color 0.15s;
+    }
+
+    .item-card:last-child { margin-bottom: 0; }
+
+    .column--highlights .item-card:hover { border-color: rgba(34,197,94,0.4); }
+    .column--pain       .item-card:hover { border-color: rgba(239,68,68,0.4); }
+
+    .item-text {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    /* Count badge — size scales with count value */
+    .badge {
+      flex-shrink: 0;
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .column--highlights .badge {
+      background: var(--green-dim);
+      color: var(--green);
+    }
+
+    .column--pain .badge {
+      background: var(--red-dim);
+      color: var(--red);
+    }
+
+    /* Badges for high counts are slightly larger */
+    .badge--high {
+      font-size: 0.88rem;
+      padding: 4px 11px;
+    }
+
+    /* ── Empty state ── */
+    .empty {
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .results {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Review Intelligence</h1>
+    <p>Automatically extract highlights and pain points from guest reviews</p>
+  </header>
+
+  <button class="btn-analyze" id="analyzeBtn">Analyze Reviews</button>
+
+  <div id="errorBanner" class="error-banner" hidden></div>
+
+  <section class="results" id="results" hidden>
+    <div class="column column--highlights">
+      <div class="column-header">
+        <span class="icon">✓</span> Highlights
+      </div>
+      <div id="highlightsList"></div>
+    </div>
+    <div class="column column--pain">
+      <div class="column-header">
+        <span class="icon">✗</span> Pain Points
+      </div>
+      <div id="painList"></div>
+    </div>
+  </section>
+
+  <script>
+    const analyzeBtn   = document.getElementById('analyzeBtn');
+    const errorBanner  = document.getElementById('errorBanner');
+    const resultsEl    = document.getElementById('results');
+    const highlightsList = document.getElementById('highlightsList');
+    const painList       = document.getElementById('painList');
+
+    analyzeBtn.addEventListener('click', runAnalysis);
+
+    async function runAnalysis() {
+      setLoading(true);
+      hideError();
+      hideResults();
+
+      try {
+        const response = await fetch('/api/process_file', { method: 'POST' });
+
+        if (!response.ok) {
+          throw new Error(`Server returned ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        renderResults(data);
+
+      } catch (err) {
+        const isNetworkError = err instanceof TypeError;
+        showError(
+          isNetworkError
+            ? 'Could not reach the API. Is the backend running?'
+            : `Error: ${err.message}`
+        );
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    function setLoading(active) {
+      analyzeBtn.disabled = active;
+      analyzeBtn.innerHTML = active
+        ? '<span class="spinner"></span> Analyzing...'
+        : 'Analyze Reviews';
+    }
+
+    function showError(msg) {
+      errorBanner.textContent = msg;
+      errorBanner.hidden = false;
+    }
+
+    function hideError() {
+      errorBanner.hidden = true;
+    }
+
+    function hideResults() {
+      resultsEl.hidden = true;
+      resultsEl.classList.remove('visible');
+    }
+
+    function renderResults(data) {
+      const byCount = (a, b) => b.count - a.count;
+
+      renderList(highlightsList, (data.highlights || []).sort(byCount));
+      renderList(painList,       (data.pain_points  || []).sort(byCount));
+
+      resultsEl.hidden = false;
+      // Trigger fade-in on the next frame so the transition runs
+      requestAnimationFrame(() => resultsEl.classList.add('visible'));
+    }
+
+    function renderList(container, items) {
+      container.innerHTML = '';
+
+      if (items.length === 0) {
+        container.innerHTML = '<p class="empty">None found</p>';
+        return;
+      }
+
+      const maxCount = items[0].count;
+
+      for (const { item, count } of items) {
+        // Counts above half of the maximum are treated as "high" for badge sizing
+        const isHigh = maxCount > 1 && count >= maxCount / 2;
+
+        const card = document.createElement('div');
+        card.className = 'item-card';
+        card.innerHTML = `
+          <span class="item-text">${escapeHtml(item)}</span>
+          <span class="badge${isHigh ? ' badge--high' : ''}">×${count}</span>
+        `;
+        container.appendChild(card);
+      }
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>
