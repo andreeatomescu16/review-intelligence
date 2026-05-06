@@ -17,7 +17,7 @@ Algorithm overview
 
 Threshold choice
 ----------------
-0.75 is the empirically validated value for multi-qa-MiniLM-L6-cos-v1 on hotel
+0.70 is the empirically validated value for multi-qa-MiniLM-L6-cos-v1 on hotel
 review phrasing. At this threshold "check-in took too long", "waiting time at
 check-in was frustrating", and "check-in queue was unacceptably long" all
 collapse into one cluster correctly. At 0.80 they do not.
@@ -193,7 +193,14 @@ def deduplicate(
     embeddings: np.ndarray,
     threshold: float = _DEFAULT_THRESHOLD,
 ) -> list[dict]:
-    """Cluster and deduplicate items; return ranked results without analysis data."""
+    """
+    Cluster and deduplicate items; return ranked results without analysis data.
+
+    This is the lightweight public interface for callers that do not need
+    the full similarity matrix and cluster breakdown returned by
+    deduplicate_with_analysis(). It is not called internally by the current
+    pipeline but is retained as part of the module's public API.
+    """
     result, _ = _run_clustering(items, embeddings, threshold)
     return result
 
