@@ -71,6 +71,7 @@ async def extract_from_review(
         "model": _MODEL,
         "format": "json",
         "stream": False,
+        "options": {"temperature": 0},
         "messages": [
             {"role": "system", "content": _SYSTEM_PROMPT},
             {"role": "user", "content": review},

@@ -1,7 +1,7 @@
 ====================================================================
   REVIEW INTELLIGENCE — ANALYSIS REPORT
 ====================================================================
-  Generated  : 2026-05-06 09:21:44 UTC
+  Generated  : 2026-05-06 10:36:59 UTC
   Reviews    : 5
   Threshold  : 0.7
 
@@ -10,11 +10,11 @@
 ────────────────────────────────────────────────────────────────────
 
   Review 1  │ "The room was clean and the breakfast was excellent, but check-in took too long."
-    Highlights  (2): "Clean and comfortable room", "Excellent breakfast quality"
+    Highlights  (2): "Clean room", "Excellent breakfast"
     Pain points (1): "Long check-in time"
 
   Review 2  │ "Amazing location near the beach. Staff were friendly, although the waiting time …"
-    Highlights  (2): "Amazing location near the beach", "Friendly staff"
+    Highlights  (1): "Amazing location near the beach"
     Pain points (1): "Waiting time at check-in was frustrating"
 
   Review 3  │ "Great breakfast and very clean rooms. The reception process was slow."
@@ -22,80 +22,74 @@
     Pain points (1): "Slow check-in"
 
   Review 4  │ "The beds were very comfortable and the staff were helpful, but the Wi-Fi was ver…"
-    Highlights  (2): "Beds were very comfortable", "Staff were helpful"
-    Pain points (1): "Wi-Fi was very slow throughout our stay"
+    Highlights  (2): "Very comfortable beds", "Helpful staff"
+    Pain points (1): "Slow Wi-Fi"
 
   Review 5  │ "Fantastic location and beautiful views from the room. However, the check-in queu…"
     Highlights  (2): "Fantastic location", "Beautiful views from the room"
     Pain points (1): "Long check-in queue"
 
 ────────────────────────────────────────────────────────────────────
-  HIGHLIGHTS — PRE-DEDUPLICATION  (10 items)
+  HIGHLIGHTS — PRE-DEDUPLICATION  (9 items)
 ────────────────────────────────────────────────────────────────────
-  [ 0] Clean and comfortable room
-  [ 1] Excellent breakfast quality
+  [ 0] Clean room
+  [ 1] Excellent breakfast
   [ 2] Amazing location near the beach
-  [ 3] Friendly staff
-  [ 4] Great breakfast
-  [ 5] Very clean rooms
-  [ 6] Beds were very comfortable
-  [ 7] Staff were helpful
-  [ 8] Fantastic location
-  [ 9] Beautiful views from the room
+  [ 3] Great breakfast
+  [ 4] Very clean rooms
+  [ 5] Very comfortable beds
+  [ 6] Helpful staff
+  [ 7] Fantastic location
+  [ 8] Beautiful views from the room
 
 ────────────────────────────────────────────────────────────────────
   HIGHLIGHTS — PAIRWISE COSINE SIMILARITY MATRIX
 ────────────────────────────────────────────────────────────────────
-            [0]    [1]    [2]    [3]    [4]    [5]    [6]    [7]    [8]    [9]
-  [ 0]   1.0000 0.2828 0.2007 0.2888 0.2524 0.8320 0.4297 0.1380 0.2044 0.4213
-  [ 1]   0.2828 1.0000 0.1437 0.2315 0.9018 0.2707 0.3088 0.1612 0.1580 0.1949
-  [ 2]   0.2007 0.1437 1.0000 0.0366 0.1614 0.2092 0.1242-0.0113 0.6695 0.3786
-  [ 3]   0.2888 0.2315 0.0366 1.0000 0.1791 0.2711 0.1959 0.7223 0.0407 0.1699
-  [ 4]   0.2524 0.9018 0.1614 0.1791 1.0000 0.2175 0.2869 0.1308 0.1887 0.2040
-  [ 5]   0.8320 0.2707 0.2092 0.2711 0.2175 1.0000 0.3148 0.1879 0.2330 0.4710
-  [ 6]   0.4297 0.3088 0.1242 0.1959 0.2869 0.3148 1.0000 0.2686 0.1150 0.2206
-  [ 7]   0.1380 0.1612-0.0113 0.7223 0.1308 0.1879 0.2686 1.0000-0.0255 0.0406
-  [ 8]   0.2044 0.1580 0.6695 0.0407 0.1887 0.2330 0.1150-0.0255 1.0000 0.3688
-  [ 9]   0.4213 0.1949 0.3786 0.1699 0.2040 0.4710 0.2206 0.0406 0.3688 1.0000
+            [0]    [1]    [2]    [3]    [4]    [5]    [6]    [7]    [8]
+  [ 0]   1.0000 0.1793 0.1721 0.1867 0.9126 0.2283 0.1404 0.1647 0.4553
+  [ 1]   0.1793 1.0000 0.1414 0.9712 0.2192 0.3286 0.1954 0.1529 0.1771
+  [ 2]   0.1721 0.1414 1.0000 0.1614 0.2092 0.1729 0.0140 0.6695 0.3786
+  [ 3]   0.1867 0.9712 0.1614 1.0000 0.2175 0.3168 0.1514 0.1887 0.2040
+  [ 4]   0.9126 0.2192 0.2092 0.2175 1.0000 0.3486 0.1655 0.2330 0.4710
+  [ 5]   0.2283 0.3286 0.1729 0.3168 0.3486 1.0000 0.1088 0.1906 0.2561
+  [ 6]   0.1404 0.1954 0.0140 0.1514 0.1655 0.1088 1.0000 0.0136 0.0457
+  [ 7]   0.1647 0.1529 0.6695 0.1887 0.2330 0.1906 0.0136 1.0000 0.3688
+  [ 8]   0.4553 0.1771 0.3786 0.2040 0.4710 0.2561 0.0457 0.3688 1.0000
 
   Pairs above threshold (0.7) → merged into same cluster:
-    [ 1]↔[ 4]  0.9018  "Excellent breakfast quality" ↔ "Great breakfast"
-    [ 0]↔[ 5]  0.8320  "Clean and comfortable room" ↔ "Very clean rooms"
-    [ 3]↔[ 7]  0.7223  "Friendly staff" ↔ "Staff were helpful"
+    [ 1]↔[ 3]  0.9712  "Excellent breakfast" ↔ "Great breakfast"
+    [ 0]↔[ 4]  0.9126  "Clean room" ↔ "Very clean rooms"
 
 ────────────────────────────────────────────────────────────────────
   HIGHLIGHTS — CLUSTERS  (threshold=0.7)
 ────────────────────────────────────────────────────────────────────
 
-  Cluster 1  ×2  representative: "Clean and comfortable room"
-    [ 0] "Clean and comfortable room"  mean_sim=0.8320  ← chosen representative
-    [ 5] "Very clean rooms"  mean_sim=0.8320
+  Cluster 1  ×2  representative: "Clean room"
+    [ 0] "Clean room"  mean_sim=0.9126  ← chosen representative
+    [ 4] "Very clean rooms"  mean_sim=0.9126
     Intra-cluster pairwise similarities:
-      [ 0]↔[ 5]  0.8320  "Clean and comfortable room" ↔ "Very clean rooms"
+      [ 0]↔[ 4]  0.9126  "Clean room" ↔ "Very clean rooms"
 
-  Cluster 2  ×2  representative: "Excellent breakfast quality"
-    [ 1] "Excellent breakfast quality"  mean_sim=0.9018  ← chosen representative
-    [ 4] "Great breakfast"  mean_sim=0.9018
+  Cluster 2  ×2  representative: "Excellent breakfast"
+    [ 1] "Excellent breakfast"  mean_sim=0.9712  ← chosen representative
+    [ 3] "Great breakfast"  mean_sim=0.9712
     Intra-cluster pairwise similarities:
-      [ 1]↔[ 4]  0.9018  "Excellent breakfast quality" ↔ "Great breakfast"
+      [ 1]↔[ 3]  0.9712  "Excellent breakfast" ↔ "Great breakfast"
 
-  Cluster 3  ×2  representative: "Friendly staff"
-    [ 3] "Friendly staff"  mean_sim=0.7223  ← chosen representative
-    [ 7] "Staff were helpful"  mean_sim=0.7223
-    Intra-cluster pairwise similarities:
-      [ 3]↔[ 7]  0.7223  "Friendly staff" ↔ "Staff were helpful"
-
-  Cluster 4  ×1  representative: "Amazing location near the beach"
+  Cluster 3  ×1  representative: "Amazing location near the beach"
     [ 2] "Amazing location near the beach"  ← chosen representative
 
-  Cluster 5  ×1  representative: "Beds were very comfortable"
-    [ 6] "Beds were very comfortable"  ← chosen representative
+  Cluster 4  ×1  representative: "Very comfortable beds"
+    [ 5] "Very comfortable beds"  ← chosen representative
+
+  Cluster 5  ×1  representative: "Helpful staff"
+    [ 6] "Helpful staff"  ← chosen representative
 
   Cluster 6  ×1  representative: "Fantastic location"
-    [ 8] "Fantastic location"  ← chosen representative
+    [ 7] "Fantastic location"  ← chosen representative
 
   Cluster 7  ×1  representative: "Beautiful views from the room"
-    [ 9] "Beautiful views from the room"  ← chosen representative
+    [ 8] "Beautiful views from the room"  ← chosen representative
 
 ────────────────────────────────────────────────────────────────────
   PAIN POINTS — PRE-DEDUPLICATION  (5 items)
@@ -103,18 +97,18 @@
   [ 0] Long check-in time
   [ 1] Waiting time at check-in was frustrating
   [ 2] Slow check-in
-  [ 3] Wi-Fi was very slow throughout our stay
+  [ 3] Slow Wi-Fi
   [ 4] Long check-in queue
 
 ────────────────────────────────────────────────────────────────────
   PAIN POINTS — PAIRWISE COSINE SIMILARITY MATRIX
 ────────────────────────────────────────────────────────────────────
             [0]    [1]    [2]    [3]    [4]
-  [ 0]   1.0000 0.6050 0.7337 0.2597 0.7541
-  [ 1]   0.6050 1.0000 0.7336 0.3330 0.5610
-  [ 2]   0.7337 0.7336 1.0000 0.3510 0.6521
-  [ 3]   0.2597 0.3330 0.3510 1.0000 0.1901
-  [ 4]   0.7541 0.5610 0.6521 0.1901 1.0000
+  [ 0]   1.0000 0.6050 0.7337 0.2631 0.7541
+  [ 1]   0.6050 1.0000 0.7336 0.2970 0.5610
+  [ 2]   0.7337 0.7336 1.0000 0.4267 0.6521
+  [ 3]   0.2631 0.2970 0.4267 1.0000 0.2124
+  [ 4]   0.7541 0.5610 0.6521 0.2124 1.0000
 
   Pairs above threshold (0.7) → merged into same cluster:
     [ 0]↔[ 4]  0.7541  "Long check-in time" ↔ "Long check-in queue"
@@ -138,22 +132,22 @@
       [ 1]↔[ 4]  0.5610  "Waiting time at check-in was frustrating" ↔ "Long check-in queue"
       [ 2]↔[ 4]  0.6521  "Slow check-in" ↔ "Long check-in queue"
 
-  Cluster 2  ×1  representative: "Wi-Fi was very slow throughout our stay"
-    [ 3] "Wi-Fi was very slow throughout our stay"  ← chosen representative
+  Cluster 2  ×1  representative: "Slow Wi-Fi"
+    [ 3] "Slow Wi-Fi"  ← chosen representative
 
 ────────────────────────────────────────────────────────────────────
   FINAL RESULTS
 ────────────────────────────────────────────────────────────────────
 
   HIGHLIGHTS:
-    ×2  Clean and comfortable room
-    ×2  Excellent breakfast quality
-    ×2  Friendly staff
+    ×2  Clean room
+    ×2  Excellent breakfast
     ×1  Amazing location near the beach
     ×1  Beautiful views from the room
-    ×1  Beds were very comfortable
     ×1  Fantastic location
+    ×1  Helpful staff
+    ×1  Very comfortable beds
 
   PAIN POINTS:
     ×4  Slow check-in
-    ×1  Wi-Fi was very slow throughout our stay
+    ×1  Slow Wi-Fi
